@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>KAGEFUDA テスター募集</title>
+<link rel="icon" href="img/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap">
+<style>
+/* 遠隔のテスター向けの案内（チラシ tester-flyer と参加手順 tester-howto をスマホ向けにまとめたもの）。QR の代わりにタップで開くボタン */
+:root {
+  --bg: #F6F5FA;
+  --paper: #FFFFFF;
+  --ink: #1C1A3A;
+  --ink-soft: #55526E;
+  --night: #17143A;
+  --gold: #B98A25;
+  --gold-light: #F2D88E;
+  --gold-soft: #F4EBD3;
+  --panel: #F1F0F7;
+  --ok: #23805A;
+  --ng: #C23B36;
+  --display: "Shippori Mincho B1", "Yu Mincho", "Hiragino Mincho ProN", serif;
+  --body: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.7; }
+a { color: inherit; }
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 16px; }
+
+.hero { background: var(--night); color: #fff; padding: 28px 0 30px; }
+.hero .wrap { display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: center; }
+.eyebrow { display: inline-block; background: var(--gold); color: var(--night); font-weight: 900; letter-spacing: .2em; font-size: 13px; padding: 2px 12px 2px 14px; border-radius: 8px; }
+.hero h1 { white-space: nowrap; font-family: var(--display); font-weight: 800; font-size: clamp(28px, 8vw, 52px); line-height: 1.1; margin: 10px 0 6px; }
+.hero h1 small { font-size: .55em; color: #E9C877; margin-left: 8px; }
+.catch { font-weight: 700; color: var(--gold-light); margin: 0 0 8px; font-size: 17px; }
+.lead { margin: 0; color: #DCDAF0; font-size: 14.5px; }
+.hero img { width: clamp(64px, 20vw, 150px); border-radius: 22%; transform: rotate(4deg); box-shadow: 0 0 0 3px rgba(242, 216, 142, .55), 0 10px 24px rgba(0, 0, 0, .45); }
+
+section { padding: 26px 0 4px; }
+h2 { font-family: var(--display); font-size: 23px; margin: 0 0 14px; display: flex; align-items: center; gap: 10px; color: var(--night); }
+h2::before { content: ""; width: 7px; height: 24px; background: var(--gold); border-radius: 2px; flex: none; }
+
+.conds { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+.cond { background: var(--paper); border-radius: 12px; padding: 12px 16px; }
+.cond b { display: block; font-size: 17px; }
+.cond span { font-size: 14px; color: var(--ink-soft); }
+
+.step { background: var(--paper); border-radius: 14px; padding: 18px 18px 20px; margin-bottom: 14px; }
+.step-h { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.num { width: 34px; height: 34px; border-radius: 50%; background: var(--night); color: var(--gold-light); font-weight: 900; display: grid; place-items: center; flex: none; }
+.step-h b { font-size: 18px; line-height: 1.4; }
+.step p { margin: 6px 0; }
+.note { font-size: 14px; color: var(--ink-soft); background: var(--panel); border-radius: 8px; padding: 8px 12px; margin-top: 10px; }
+.note b { color: var(--ng); }
+.btn { display: block; text-align: center; background: var(--night); color: var(--gold-light); text-decoration: none; font-weight: 700; font-size: 17px; border-radius: 12px; padding: 14px 16px; margin: 12px 0 4px; }
+.btn:active { opacity: .85; }
+.btn small { display: block; font-weight: 400; font-size: 13px; color: #DCDAF0; }
+.copy { font-size: 14px; color: var(--ink-soft); }
+.copy code { font-family: inherit; color: var(--ink); font-weight: 700; user-select: all; }
+
+.route { background: var(--panel); border-radius: 12px; padding: 12px; margin-top: 12px; }
+.route h3 { font-size: 16px; margin: 0 0 10px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.badge { font-size: 12px; font-weight: 700; padding: 1px 10px; border-radius: 10px; background: var(--night); color: var(--gold-light); }
+.badge.sub { background: #fff; color: var(--ink-soft); border: 1px solid #D5D3E2; }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.shot { margin: 0; }
+.shot .im { position: relative; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 12px rgba(28, 26, 58, .2); line-height: 0; }
+.shot img { width: 100%; display: block; }
+.ring { position: absolute; border: 3px solid var(--gold); border-radius: 10px; box-shadow: 0 0 0 3px rgba(185, 138, 37, .3); }
+.shot figcaption { font-size: 13.5px; line-height: 1.5; margin-top: 8px; }
+.shot figcaption b { color: var(--night); }
+.done { color: var(--ok); font-weight: 900; }
+
+.timeline { display: grid; gap: 6px; }
+.tl { background: var(--paper); border-radius: 10px; padding: 10px 14px; font-size: 15px; }
+.tl em { font-style: normal; font-weight: 900; color: var(--gold); margin-right: 8px; }
+.tl.last { background: var(--gold-soft); }
+.warn { color: var(--ng); font-weight: 700; font-size: 14.5px; margin: 10px 0 0; }
+.sub { font-size: 14px; color: var(--ink-soft); margin: 6px 0 0; }
+
+.rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-top: 14px; }
+.rule { border-radius: 12px; padding: 14px 18px; }
+.rule.ok { background: #E9F4EE; }
+.rule.ng { background: #FBEBEA; }
+.rule h3 { margin: 0 0 6px; font-size: 17px; }
+.rule.ok h3 { color: var(--ok); }
+.rule.ng h3 { color: var(--ng); }
+.rule ul { margin: 0; padding: 0; list-style: none; }
+.rule li { padding-left: 1.4em; position: relative; font-size: 15px; margin: 3px 0; }
+.rule li::before { position: absolute; left: 0; font-weight: 900; }
+.rule.ok li::before { content: "✓"; color: var(--ok); }
+.rule.ng li::before { content: "×"; color: var(--ng); }
+.rule li small { color: var(--ink-soft); }
+
+.notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+.nt { background: var(--paper); border-radius: 12px; padding: 12px 16px; font-size: 14px; color: var(--ink-soft); }
+.nt b { display: block; color: var(--ink); font-size: 16px; }
+.pdfs { display: flex; gap: 10px; flex-wrap: wrap; }
+.pdfs a { flex: 1 1 200px; text-align: center; background: var(--paper); border: 1px solid #D5D3E2; border-radius: 10px; padding: 10px; text-decoration: none; font-weight: 700; color: var(--night); }
+
+footer { background: var(--night); color: #DCDAF0; margin-top: 30px; padding: 20px 0 28px; font-size: 14px; }
+footer b { color: var(--gold-light); }
+footer a { color: #fff; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">テスター募集</span>
+      <h1>KAGEFUDA<small>影札</small></h1>
+      <p class="catch">スマホに手をかざすと、カードが出現！</p>
+      <p class="lead">公開前のカードマジックアプリを、14 日間いっしょに試してください。Google Play に出すには、12 人以上のテストが必要です。</p>
+    </div>
+    <img src="img/icon.png" alt="">
+  </div>
+</header>
+
+<main class="wrap">
+  <section>
+    <h2>参加の条件</h2>
+    <div class="conds">
+      <div class="cond"><b>Android 12 以上</b><span>iPhone は不可。設定 → デバイス情報で確認</span></div>
+      <div class="cond"><b>Google アカウント</b><span>スマホの Google Play で使っているもの</span></div>
+      <div class="cond"><b>14 日間 続けられる</b><span>1 日 1 回、1〜2 分アプリを開くだけ</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>参加の流れ</h2>
+
+    <div class="step">
+      <div class="step-h"><span class="num">1</span><b>メールで申し込む</b></div>
+      <p>下のボタンを押すと、宛先と件名の入ったメールが開きます。<b>機種と Android のバージョン</b>を書いて送ってください。</p>
+      <a class="btn" href="mailto:kagefuda.project.2026@gmail.com?subject=KAGEFUDA%20%E3%83%86%E3%82%B9%E3%82%BF%E3%83%BC%E5%8F%82%E5%8A%A0&amp;body=%E6%A9%9F%E7%A8%AE%EF%BC%9A%0AAndroid%20%E3%81%AE%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%EF%BC%9A%0A">メールで申し込む<small>スマホの Google Play と同じ Gmail から</small></a>
+      <p class="copy">開かない時は <code>kagefuda.project.2026@gmail.com</code> へ、件名「KAGEFUDA テスター参加」で送ってください。</p>
+      <p class="note"><b>キャリアのメールや iCloud からは参加できません。</b>Gmail のアプリから送ってください。</p>
+    </div>
+
+    <div class="step">
+      <div class="step-h"><span class="num">2</span><b>返信を待つ</b></div>
+      <p>テスターに登録して、参加用のリンク（【Android】と【開けない時】）を返信します。</p>
+      <p class="note">1 日ほどかかることがあります。</p>
+    </div>
+
+    <div class="step">
+      <div class="step-h"><span class="num">3</span><b>参加して、インストール</b></div>
+
+      <div class="route">
+        <h3>返信の【Android】のリンクを開く<span class="badge">ふつうはこちら</span></h3>
+        <div class="pair">
+          <figure class="shot">
+            <div class="im"><img src="img/1-install.jpg" alt="Google Play の KAGEFUDA のページ。インストールのボタンがある"><span class="ring" style="left:2%; top:71%; width:96%; height:12%"></span></div>
+            <figcaption><b>「インストール」</b>を押す<br>「（早期アクセス）」はテスト版の印です</figcaption>
+          </figure>
+          <figure class="shot">
+            <div class="im"><img src="img/2-joined.jpg" alt="インストール後。このアプリの早期アクセスに登録しました、と出ている"><span class="ring" style="left:1.5%; top:81%; width:97%; height:18%"></span></div>
+            <figcaption>「早期アクセスに登録しました」と出れば<span class="done">参加できています</span></figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="route">
+        <h3>開けない時は【開けない時】のリンク<span class="badge sub">ブラウザで開きます</span></h3>
+        <div class="pair">
+          <figure class="shot">
+            <div class="im"><img src="img/3-web-join.jpg" alt="ブラウザの Google Play。テスターになる、のボタンがある"><span class="ring" style="left:4.5%; top:84%; width:44%; height:15%"></span></div>
+            <figcaption><b>「テスターになる」</b>を押す<br>右上のアカウントが、メールを送ったものか確かめる</figcaption>
+          </figure>
+          <figure class="shot">
+            <div class="im"><img src="img/4-web-done.jpg" alt="あなたはテスターです、と出ている。下に Google Play からダウンロードしてください、のリンク"><span class="ring" style="left:24.5%; top:52.5%; width:49.5%; height:10%"></span><span class="ring" style="left:4%; top:87.5%; width:92%; height:11%"></span></div>
+            <figcaption>「あなたはテスターです」と出たら、下の<b>「Google Play からダウンロード」</b>からインストール</figcaption>
+          </figure>
+        </div>
+      </div>
+      <p class="note">「見つかりません」と出た時は、数時間おいてから開き直してください。</p>
+    </div>
+
+    <div class="step">
+      <div class="step-h"><span class="num">4</span><b>アプリを開いて設定</b></div>
+      <p>アプリの画面の<b>「はじめにやること」</b>に沿って設定します（「画面上に表示」の許可・通知の許可）。</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>14 日間のテスト</h2>
+    <div class="timeline">
+      <div class="tl"><em>1 日目</em>インストール・設定、記録を送る</div>
+      <div class="tl"><em>2〜13 日目</em>毎日 1 回アプリを開いて少し使い、記録を送る（カードを出して、払って消すだけで OK）</div>
+      <div class="tl last"><em>14 日目</em>最後の記録と、全体の感想</div>
+    </div>
+    <p class="sub">14 日は「12 人がそろった日」から数えます。終わりの日はご連絡します。</p>
+    <p class="warn">1 人でも抜けると数え直しになることがあります。</p>
+    <a class="btn" href="https://forms.gle/EzrG6PEtnxdgvcot9">毎日の記録を送る<small>30 秒で完了・使った日に 1 回</small></a>
+
+    <div class="rules">
+      <div class="rule ok">
+        <h3>✓ やっていただくこと</h3>
+        <ul>
+          <li>14 日間、アプリを入れたままにする</li>
+          <li>毎日 1 回開いて、1〜2 分使う</li>
+          <li>使った日は記録のフォームを送る</li>
+          <li>アップデートが来たら更新する</li>
+          <li>不具合・分かりにくい所を教える <small>小さなことでも</small></li>
+        </ul>
+      </div>
+      <div class="rule ng">
+        <h3>× やらないでいただきたいこと</h3>
+        <ul>
+          <li>14 日の途中でアンインストール</li>
+          <li>テストから退出する</li>
+          <li>アカウント・スマホを変える <small>変える時は先にご連絡を</small></li>
+          <li>画面や仕組みを SNS などに出す <small>マジック用なので内緒に</small></li>
+          <li>アプリのファイルを人に渡す</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="notes">
+      <div class="nt"><b>Gmail の扱い</b>登録と連絡にだけ使います。ほかの人には見えません。</div>
+      <div class="nt"><b>テスト版は全部無料</b>試用期間・購入の表示なし。公開後もそのまま使えます。</div>
+      <div class="nt"><b>お礼</b>公開後、有料機能を無料で使えるコードをお送りします。</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>印刷用</h2>
+    <div class="pdfs">
+      <a href="tester-flyer.pdf">チラシ（PDF）</a>
+      <a href="tester-howto.pdf">参加手順（PDF）</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <b>Wiz@rd_TK.</b>　KAGEFUDA 開発者<br>
+    ご質問・ご連絡　<a href="mailto:kagefuda.project.2026@gmail.com">kagefuda.project.2026@gmail.com</a><br>
+    <a href="https://wizard-tk.github.io/kagefuda-privacy/">プライバシーポリシー</a>
+  </div>
+</footer>
+
+</body>
+</html>
